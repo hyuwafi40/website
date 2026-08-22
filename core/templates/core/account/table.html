@@ -1,0 +1,72 @@
+{% if accounts %}
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Photo</th>
+                    <th>Username</th>
+                    <th>Full Name</th>
+                    <th>Gender</th>
+                    <th>Job</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for account in accounts %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>
+                            {% if account.profile.photo %}
+                                <img src="{{ account.profile.photo }}"
+                                     alt="{{ account.username }}"
+                                     class="account-avatar">
+                            {% else %}
+                                <div class="account-avatar-default">
+                                    <i class="fa-solid fa-user"></i>
+                                </div>
+                            {% endif %}
+                        </td>
+                        <td>{{ account.username }}</td>
+                        <td>{{ account.get_full_name|default:"-" }}</td>
+                        <td>{{ account.profile.get_gender_display|default:"-" }}</td>
+                        <td>{{ account.get_job_display }}</td>
+                        <td>
+                            <div class="table-actions">
+                                <button type="button"
+                                        class="btn-icon edit-account-btn"
+                                        data-url="{% url 'core:account_edit' account.slug %}"
+                                        data-username="{{ account.username }}"
+                                        data-first_name="{{ account.first_name }}"
+                                        data-last_name="{{ account.last_name }}"
+                                        data-email="{{ account.email }}"
+                                        data-job="{{ account.job }}"
+                                        data-photo="{{ account.profile.photo|default:'' }}"
+                                        data-gender="{{ account.profile.gender|default:'' }}"
+                                        title="Edit">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+                                <button type="button"
+                                        class="btn-icon delete-btn"
+                                        data-url="{% url 'core:account_delete' account.slug %}"
+                                        data-title="{{ account.username }}"
+                                        title="Hapus">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <div class="empty-state">
+        <i class="fa-solid fa-users empty-icon"></i>
+        <h3 class="empty-title">Belum Ada Pengguna</h3>
+        <p class="empty-desc">Mulai buat pengguna baru.</p>
+        <button type="button" class="btn btn-primary open-account-modal">
+            <i class="fa-solid fa-plus"></i> Buat Pengguna
+        </button>
+    </div>
+{% endif %}

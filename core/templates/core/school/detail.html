@@ -1,0 +1,171 @@
+<div class="field-container field-fade-in">
+    <div class="field-header">
+        <div>
+            <h2 class="field-title">{{ school.name|default:"School" }}</h2>
+            <p class="field-subtitle">Informasi Sekolah</p>
+        </div>
+        <a href="{% url 'core:school_update' %}" class="btn btn-primary">
+            <i class="fa-solid fa-pen-to-square"></i> Edit School
+        </a>
+    </div>
+    <div class="field-grid">
+        <div class="field-card">
+            <div class="field-section-header">
+                <div class="field-section-icon">
+                    <i class="fa-solid fa-school"></i>
+                </div>
+                <div>
+                    <h3 class="field-section-title">Informasi Dasar</h3>
+                    <p class="field-section-desc">Data pokok sekolah</p>
+                </div>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Nama</span>
+                <span class="field-value">{{ school.name|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Logo</span>
+                <div class="field-value field-logo">
+                    {% if school.logo %}
+                        <img src="{{ school.logo }}" alt="{{ school.name }}">
+                        <a href="{{ school.logo }}" target="_blank" rel="noopener noreferrer">{{ school.logo }}</a>
+                    {% else %}
+                        -
+                    {% endif %}
+                </div>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Email</span>
+                <span class="field-value">{{ school.email|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Website</span>
+                <span class="field-value">{{ school.website|default:"-" }}</span>
+            </div>
+        </div>
+        <div class="field-card">
+            <div class="field-section-header">
+                <div class="field-section-icon">
+                    <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <div>
+                    <h3 class="field-section-title">Kontak & Alamat</h3>
+                    <p class="field-section-desc">Lokasi dan kontak</p>
+                </div>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Telepon</span>
+                <span class="field-value">{{ school.phone|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Alamat</span>
+                <span class="field-value">{{ school.address|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Kelurahan</span>
+                <span class="field-value">{{ school.village|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Kecamatan</span>
+                <span class="field-value">{{ school.district|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Kota</span>
+                <span class="field-value">{{ school.city|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Provinsi</span>
+                <span class="field-value">{{ school.province|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Kode Pos</span>
+                <span class="field-value">{{ school.postal_code|default:"-" }}</span>
+            </div>
+        </div>
+        <div class="field-card">
+            <div class="field-section-header">
+                <div class="field-section-icon">
+                    <i class="fa-solid fa-chalkboard-user"></i>
+                </div>
+                <div>
+                    <h3 class="field-section-title">Data Sekolah</h3>
+                    <p class="field-section-desc">Identitas resmi sekolah</p>
+                </div>
+            </div>
+            <div class="field-row">
+                <span class="field-label">NPSN</span>
+                <span class="field-value">{{ school.npsn|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">NSS</span>
+                <span class="field-value">{{ school.nss|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Jenjang</span>
+                <span class="field-value">{{ school.school_type|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Status</span>
+                <span class="field-value">{{ school.school_status|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Akreditasi</span>
+                <span class="field-value">{{ school.accreditation|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Kurikulum</span>
+                <span class="field-value">{{ school.curriculum|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Tahun Berdiri</span>
+                <span class="field-value">{{ school.established_year|default:"-" }}</span>
+            </div>
+        </div>
+        <div class="field-card">
+            <div class="field-section-header">
+                <div class="field-section-icon">
+                    <i class="fa-solid fa-user-tie"></i>
+                </div>
+                <div>
+                    <h3 class="field-section-title">Kepala Sekolah</h3>
+                    <p class="field-section-desc">Informasi kepala sekolah</p>
+                </div>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Nama</span>
+                <span class="field-value">{{ school.headmaster_name|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">NIP</span>
+                <span class="field-value">{{ school.headmaster_nip|default:"-" }}</span>
+            </div>
+        </div>
+        <div class="field-card">
+            <div class="field-section-header">
+                <div class="field-section-icon">
+                    <i class="fa-solid fa-bullseye"></i>
+                </div>
+                <div>
+                    <h3 class="field-section-title">Visi Misi</h3>
+                    <p class="field-section-desc">Tujuan sekolah</p>
+                </div>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Motto</span>
+                <span class="field-value">{{ school.motto|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Visi</span>
+                <span class="field-value">{{ school.vision|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Misi</span>
+                <span class="field-value">{{ school.mission|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Tujuan</span>
+                <span class="field-value">{{ school.goals|default:"-" }}</span>
+            </div>
+        </div>
+    </div>
+</div>

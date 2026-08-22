@@ -1,0 +1,24 @@
+<div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+<aside id="sidebar">
+    <div class="brand-area">
+        {% if school.logo %}
+            <img src="{{ school.logo }}" alt="{{ school.name }}" class="brand-logo">
+        {% else %}
+            <i class="fa-solid fa-school"></i>
+        {% endif %}
+        <h1>{{ school.name }}</h1>
+    </div>
+    <nav class="nav-menu">
+        {% for group in menus %}
+            <div class="menu-group">
+                <div class="menu-label">{{ group.label }}</div>
+                {% for item in group.items %}
+                    <a href="{% if item.url_name %}{% url item.url_name %}{% else %}#{% endif %}"
+                       class="menu-item {% if request.resolver_match.view_name == item.url_name %}active{% endif %}">
+                        <i class="{{ item.icon }}"></i> {{ item.label }}
+                    </a>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </nav>
+</aside>

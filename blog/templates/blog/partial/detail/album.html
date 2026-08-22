@@ -1,0 +1,62 @@
+<div class="container album-detail-header reveal">
+    <div>
+        <h1 class="section-title">{{ album.title }}</h1>
+        <p class="page-subtitle">{{ album.description|default:"-" }}</p>
+        <div class="album-detail-meta">
+            <span><i class="fa-regular fa-calendar"></i> {{ album.created_at|date:"d F Y" }}</span>
+            <span><i class="fa-solid fa-user"></i> {{ album.created_by|default:"-" }}</span>
+            <span><i class="fa-solid fa-image"></i> {{ photo_count }} foto</span>
+        </div>
+    </div>
+    <a href="{% url 'blog:album_list' %}"
+       class="btn btn-outline"
+       hx-get="{% url 'blog:album_list' %}"
+       hx-target="#public-main"
+       hx-push-url="true">Kembali ke Album</a>
+</div>
+<div class="container">
+    {% if photos %}
+        <div class="gallery-grid">
+            {% for photo in photos %}
+                <figure class="album-card reveal">
+                    <img src="{{ photo.photo }}"
+                         alt="{{ photo.title }}"
+                         class="public-gallery-image"
+                         data-url="{{ photo.photo }}"
+                         data-title="{{ photo.title }}"
+                         data-caption="{{ photo.caption }}"
+                         loading="lazy">
+                    <div class="album-overlay">
+                        <h3>{{ photo.title }}</h3>
+                        {% if photo.caption %}<p>{{ photo.caption }}</p>{% endif %}
+                    </div>
+                </figure>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="state-container">
+            <i class="fa-solid fa-image state-icon"></i>
+            <h2 class="section-title">Belum Ada Foto</h2>
+            <p>Album ini masih kosong.</p>
+            <a href="{% url 'blog:album_list' %}"
+               class="btn btn-outline"
+               hx-get="{% url 'blog:album_list' %}"
+               hx-target="#public-main"
+               hx-push-url="true">Lihat Album Lain</a>
+        </div>
+    {% endif %}
+</div>
+<div class="public-modal-backdrop" id="publicPhotoModal">
+    <div class="public-modal">
+        <div class="public-modal-header">
+            <h2 id="publicPhotoTitle">Preview Foto</h2>
+            <button type="button" class="btn-icon" data-close-preview>
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="public-modal-body">
+            <img id="publicPhotoImage" src="" alt="">
+            <p id="publicPhotoCaption"></p>
+        </div>
+    </div>
+</div>

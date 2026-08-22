@@ -1,0 +1,29 @@
+<header id="navbar">
+    <div class="nav-left">
+        <button class="btn-icon btn-toggle" id="btnToggle">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <h2 class="navbar-heading">{{ page_heading }}</h2>
+    </div>
+    <div class="nav-right">
+        <div class="navbar-user">
+            <div class="navbar-user-info">
+                <span class="navbar-user-name">{{ user.get_full_name|default:user.username }}</span>
+                <span class="navbar-user-role">{{ user.get_job_display }}</span>
+            </div>
+            <div class="dropdown" id="profileDropdown">
+                <div class="avatar"
+                     id="avatarTrigger"
+                     title="{{ user.get_full_name|default:user.username }}">
+                    {{ user.get_full_name|default:user.username|slice:":1"|upper }}
+                </div>
+                <div class="dropdown-menu">
+                    <a href="#" class="dropdown-item"><i class="fa-regular fa-user"></i> My Profile</a>
+                    <a href="#" class="dropdown-item"><i class="fa-solid fa-gear"></i> Settings</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="{% url 'logout' %}" class="dropdown-item danger"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

@@ -1,0 +1,39 @@
+{% extends "private/base.html" %}
+{% load static %}
+{% block title %}Backup & Restore{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'core/resources.css' %}">
+{% endblock %}
+{% block content %}
+    {% include "private/base/breadcrumb.html" %}
+    <div class="page-header">
+        <div>
+            <h2 class="page-title">Backup & Restore</h2>
+            <p class="page-subtitle">Kelola data aplikasi secara aman</p>
+        </div>
+    </div>
+    <div class="resources-layout">
+        <section class="resources-summary">
+            <h3 class="resources-section-title">Ringkasan Database</h3>
+            {% include "core/resources/table.html" %}
+        </section>
+        <section class="resources-actions">
+            <div class="resources-tabs" role="tablist">
+                <button type="button" class="resources-tab active" data-tab="backup-tab">Backup</button>
+                <button type="button" class="resources-tab" data-tab="restore-tab">Restore</button>
+                {% if user.job == 'developer' %}
+                    <button type="button" class="resources-tab" data-tab="reset-tab">Reset</button>
+                {% endif %}
+            </div>
+            <div class="resources-tab-content active" id="backup-tab">{% include "core/resources/backup.html" %}</div>
+            <div class="resources-tab-content" id="restore-tab">{% include "core/resources/restore.html" %}</div>
+            {% if user.job == 'developer' %}
+                <div class="resources-tab-content" id="reset-tab">{% include "core/resources/reset.html" %}</div>
+            {% endif %}
+        </section>
+    </div>
+    {% include "core/resources/loading.html" %}
+{% endblock %}
+{% block extra_js %}
+    <script src="{% static 'core/resources.js' %}"></script>
+{% endblock %}

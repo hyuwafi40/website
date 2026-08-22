@@ -1,0 +1,18 @@
+<div class="section-block">
+    <h3 class="section-title">Akses Menu</h3>
+    <div class="menu-access-grid">
+        {% for group in menus %}
+            <div class="menu-access-group">
+                <div class="menu-access-label">{{ group.label }}</div>
+                <div class="menu-access-items">
+                    {% for item in group.items %}
+                        <a href="{{ item.url }}" class="menu-access-item">
+                            <i class="{{ item.icon }}"></i>
+                            <span>{{ item.label }}</span>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>

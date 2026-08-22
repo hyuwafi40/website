@@ -1,0 +1,141 @@
+{% load static %}
+<header id="app-header" class="navbar">
+    <div class="container">
+        <div class="navbar-content">
+            <a href="{% url 'blog:index' %}"
+               class="logo"
+               aria-label="{{ school.name|default:"Sekolah" }}">
+                {% if school.logo %}
+                    <img src="{{ school.logo }}"
+                         alt="{{ school.name|default:"Sekolah" }}"
+                         class="logo-image">
+                {% else %}
+                    <i class="fa-solid fa-graduation-cap"></i>
+                {% endif %}
+                <span>{{ school.name|default:"Sekolah" }}</span>
+            </a>
+            <nav class="nav-links" id="publicNavMenu" aria-label="Navigasi Utama">
+                <ul class="nav-menu-list">
+                    <li>
+                        <a href="{% url 'blog:index' %}"
+                           class="nav-item"
+                           hx-get="{% url 'blog:index' %}"
+                           hx-target="#public-main"
+                           hx-push-url="true">Beranda</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'blog:article_list' %}"
+                           class="nav-item"
+                           hx-get="{% url 'blog:article_list' %}"
+                           hx-target="#public-main"
+                           hx-push-url="true">Artikel</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'blog:album_list' %}"
+                           class="nav-item"
+                           hx-get="{% url 'blog:album_list' %}"
+                           hx-target="#public-main"
+                           hx-push-url="true">Galeri</a>
+                    </li>
+                    <li class="nav-dropdown">
+                        <button type="button"
+                                class="nav-item nav-dropdown-toggle"
+                                aria-haspopup="true"
+                                aria-expanded="false">
+                            Halaman <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <ul class="nav-dropdown-menu">
+                            {% for page in pages %}
+                                <li>
+                                    <a href="{% url 'blog:page_detail' page.slug %}"
+                                       class="nav-dropdown-item"
+                                       hx-get="{% url 'blog:page_detail' page.slug %}"
+                                       hx-target="#public-main"
+                                       hx-push-url="true">{{ page.title }}</a>
+                                </li>
+                            {% empty %}
+                                <li>
+                                    <a href="{% url 'blog:page_list' %}"
+                                       class="nav-dropdown-item"
+                                       hx-get="{% url 'blog:page_list' %}"
+                                       hx-target="#public-main"
+                                       hx-push-url="true">Semua Halaman</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li class="nav-dropdown">
+                        <button type="button"
+                                class="nav-item nav-dropdown-toggle"
+                                aria-haspopup="true"
+                                aria-expanded="false">
+                            Kategori <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <ul class="nav-dropdown-menu">
+                            {% for category in categories|slice:":6" %}
+                                <li>
+                                    <a href="{% url 'blog:category_detail' category.slug %}"
+                                       class="nav-dropdown-item"
+                                       hx-get="{% url 'blog:category_detail' category.slug %}"
+                                       hx-target="#public-main"
+                                       hx-push-url="true">
+                                        <span>{{ category.name }}</span>
+                                        <span class="badge badge-sky">{{ category.article_count }}</span>
+                                    </a>
+                                </li>
+                            {% empty %}
+                                <li>
+                                    <a href="{% url 'blog:category_list' %}"
+                                       class="nav-dropdown-item"
+                                       hx-get="{% url 'blog:category_list' %}"
+                                       hx-target="#public-main"
+                                       hx-push-url="true">Semua Kategori</a>
+                                </li>
+                            {% endfor %}
+                            <li>
+                                <a href="{% url 'blog:category_list' %}"
+                                   class="nav-dropdown-item nav-dropdown-all"
+                                   hx-get="{% url 'blog:category_list' %}"
+                                   hx-target="#public-main"
+                                   hx-push-url="true">Lihat Semua Kategori</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'core:index' %}" class="nav-item">
+                                <i class="fa-solid fa-gauge-high"></i> Dashboard
+                            </a>
+                        {% else %}
+                            <a href="{% url 'login' %}" class="nav-item">
+                                <i class="fa-solid fa-right-to-bracket"></i> Masuk
+                            </a>
+                        {% endif %}
+                    </li>
+                    <li class="nav-search">
+                        <form class="search-bar"
+                              method="get"
+                              action="{% url 'blog:search' %}"
+                              hx-get="{% url 'blog:search' %}"
+                              hx-target="#public-main"
+                              hx-push-url="true">
+                            <i class="fa-solid fa-search icon-primary"></i>
+                            <input type="search"
+                                   name="q"
+                                   placeholder="Cari info..."
+                                   aria-label="Cari konten">
+                        </form>
+                    </li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-btn"
+                    id="publicMenuToggle"
+                    aria-label="Buka Menu"
+                    aria-controls="publicNavMenu"
+                    aria-expanded="false">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </button>
+        </div>
+    </div>
+    <div class="nav-overlay" id="navOverlay"></div>
+</header>

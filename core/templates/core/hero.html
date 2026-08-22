@@ -1,0 +1,24 @@
+{% extends "private/base.html" %}
+{% load static %}
+{% block title %}Hero{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'core/hero.css' %}">
+{% endblock %}
+{% block content %}
+    {% include "private/base/breadcrumb.html" %}
+    <div class="page-header">
+        <div>
+            <h2 class="page-title">Daftar Hero</h2>
+            <p class="page-subtitle">Kelola hero carousel</p>
+        </div>
+        <button type="button" class="btn btn-primary open-hero-modal">
+            <i class="fa-solid fa-plus"></i> Buat Hero
+        </button>
+    </div>
+    {% include "core/hero/table.html" %}
+    {% include "private/base/pagination.html" %}
+    {% include "core/hero/form.html" %}
+{% endblock %}
+{% block extra_js %}
+    <script src="{% static 'core/hero.js' %}"></script>
+{% endblock %}

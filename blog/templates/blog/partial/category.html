@@ -1,0 +1,35 @@
+<div class="container search-header reveal">
+    <h1 class="section-title">Kategori</h1>
+    <p class="page-subtitle">Daftar kategori artikel.</p>
+</div>
+<div class="container">
+    <div class="category-grid">
+        {% for category in categories %}
+            <a href="{% url 'blog:category_detail' category.slug %}"
+               class="category-card reveal stagger-{{ forloop.counter0|divisibleby:3|yesno:"1,2,3" }}"
+               hx-get="{% url 'blog:category_detail' category.slug %}"
+               hx-target="#public-main"
+               hx-push-url="true">
+                <span class="category-card-icon">
+                    <i class="fa-solid fa-tag"></i>
+                </span>
+                <span class="category-card-info">
+                    <span class="category-card-name">{{ category.name }}</span>
+                    <span class="category-card-count">{{ category.article_count }} artikel</span>
+                </span>
+            </a>
+        {% empty %}
+            <div class="state-container">
+                <i class="fa-solid fa-tags state-icon"></i>
+                <h2 class="section-title">Belum Ada Kategori</h2>
+                <p>Belum ada kategori yang dibuat.</p>
+                <a href="{% url 'blog:article_list' %}"
+                   class="btn btn-outline"
+                   hx-get="{% url 'blog:article_list' %}"
+                   hx-target="#public-main"
+                   hx-push-url="true">Lihat Artikel</a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% include "public/base/pagination.html" %}

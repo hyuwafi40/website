@@ -1,0 +1,8 @@
+<div class="resources-summary-grid">
+    {% for item in model_counts %}
+        <div class="resources-summary-card">
+            <span class="resources-summary-label">{{ item.name }}</span>
+            <span class="resources-summary-count">{{ item.count }}</span>
+        </div>
+    {% endfor %}
+</div>

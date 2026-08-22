@@ -1,0 +1,13 @@
+{% if messages %}
+    <div class="toast-container">
+        {% for message in messages %}
+            <div class="toast show">
+                <i class="fa-solid {% if message.tags == 'success' %}fa-circle-check{% elif message.tags == 'error' %}fa-circle-xmark{% elif message.tags == 'warning' %}fa-triangle-exclamation{% else %}fa-circle-info{% endif %} toast-icon"></i>
+                <div class="toast-content">
+                    <h4>{{ message.tags|title }}</h4>
+                    <p>{{ message }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}

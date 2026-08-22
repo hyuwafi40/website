@@ -1,0 +1,63 @@
+{% if albums %}
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Judul</th>
+                    <th>Pembuat</th>
+                    <th>Status</th>
+                    <th>Total Foto</th>
+                    <th>Dibuat Pada</th>
+                    <th>Diperbarui Pada</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for album in albums %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ album.title }}</td>
+                        <td>{{ album.created_by }}</td>
+                        <td><span class="badge {% if album.status == 'published' %}active{% else %}pending{% endif %}">{{ album.get_status_display }}</span></td>
+                        <td>{{ album.photo_count }}</td>
+                        <td>{{ album.created_at|date:"d M Y H:i" }}</td>
+                        <td>{{ album.updated_at|date:"d M Y H:i" }}</td>
+                        <td>
+                            {% if album.can_manage %}
+                                <div class="table-actions">
+                                    <form method="post" action="{% url 'core:album_toggle' album.slug %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn-icon" title="Ubah Status">
+                                            <i class="fa-solid fa-rotate"></i>
+                                        </button>
+                                    </form>
+                                    <a href="{% url 'core:album_gallery' album.slug %}"
+                                       class="btn-icon"
+                                       title="Galeri"><i class="fa-solid fa-images"></i></a>
+                                    <a href="{% url 'core:album_edit' album.slug %}"
+                                       class="btn-icon"
+                                       title="Edit"><i class="fa-solid fa-pen"></i></a>
+                                    <button type="button"
+                                            class="btn-icon delete-btn"
+                                            data-url="{% url 'core:album_delete' album.slug %}"
+                                            data-title="{{ album.title }}"
+                                            title="Hapus">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <div class="empty-state">
+        <i class="fa-solid fa-folder-open empty-icon"></i>
+        <h3 class="empty-title">Belum Ada Album</h3>
+        <p class="empty-desc">Anda belum memiliki album. Mulai buat album pertama Anda.</p>
+        <a href="{% url 'core:album_create' %}" class="btn btn-primary"><i class="fa-solid fa-folder-plus"></i> Buat Album</a>
+    </div>
+{% endif %}

@@ -1,0 +1,29 @@
+<div class="modal-backdrop" id="tagModal">
+    <div class="modal">
+        <div class="modal-header">
+            <h2 id="tagModalTitle">Buat Tag</h2>
+            <button type="button" class="btn-icon" data-close-modal>
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form method="post"
+                  action="{% url 'core:tag_create' %}"
+                  data-create-url="{% url 'core:tag_create' %}"
+                  id="tagForm">
+                {% csrf_token %}
+                <div class="input-group">
+                    <label for="{{ form.name.id_for_label }}">{{ form.name.label }}</label>
+                    {{ form.name }}
+                    <div class="field-error" id="tagFormError"></div>
+                </div>
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa-solid fa-check"></i> Simpan
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-close-modal>Batal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

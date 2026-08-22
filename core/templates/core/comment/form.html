@@ -1,0 +1,26 @@
+<div class="modal-backdrop" id="commentModal">
+    <div class="modal">
+        <div class="modal-header">
+            <h2 id="commentModalTitle">Ubah Status Komentar</h2>
+            <button type="button" class="btn-icon" data-close-modal>
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form method="post" action="#" id="commentForm">
+                {% csrf_token %}
+                <div class="input-group">
+                    <label for="{{ form.status.id_for_label }}">{{ form.status.label }}</label>
+                    {{ form.status }}
+                    <div class="field-error" id="commentFormError"></div>
+                </div>
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa-solid fa-check"></i> Simpan
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-close-modal>Batal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

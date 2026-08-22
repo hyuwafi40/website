@@ -1,0 +1,53 @@
+<div class="dashboard-hero">
+    <div class="dashboard-hero-text">
+        <h2>Halo, {{ user.get_full_name|default:user.username }}</h2>
+        <p>{{ user.get_job_display }} &middot; {% now "l, d F Y" %}</p>
+    </div>
+</div>
+<div class="section-block">
+    <h3 class="section-title">Statistik Saya</h3>
+    <div class="stats-grid">
+        {% for stat in personal_stats %}
+            <div class="stat-card">
+                <div class="stat-icon primary">
+                    <i class="{{ stat.icon }}"></i>
+                </div>
+                <div class="stat-details">
+                    <h3>{{ stat.label }}</h3>
+                    <p>{{ stat.value }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% if global_stats %}
+    <div class="section-block">
+        <h3 class="section-title">Statistik Global</h3>
+        <div class="stats-grid">
+            {% for stat in global_stats %}
+                <div class="stat-card">
+                    <div class="stat-icon success">
+                        <i class="{{ stat.icon }}"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3>{{ stat.label }}</h3>
+                        <p>{{ stat.value }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+{% include "core/index/partials/school.html" %}
+<div class="section-block">
+    <h3 class="section-title">Aksi Cepat</h3>
+    <div class="btn-group no-margin">
+        <a href="#" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i> Buat Artikel</a>
+        <a href="#" class="btn btn-secondary"><i class="fa-solid fa-folder-plus"></i> Buat Album</a>
+        <a href="#" class="btn btn-secondary"><i class="fa-solid fa-upload"></i> Unggah Foto</a>
+        <a href="#" class="btn btn-secondary"><i class="fa-solid fa-comments"></i> Kelola Komentar</a>
+        <a href="#" class="btn btn-secondary"><i class="fa-solid fa-tags"></i> Atur Kategori</a>
+        <a href="#" class="btn btn-secondary"><i class="fa-solid fa-file-lines"></i> Atur Halaman</a>
+    </div>
+</div>
+{% include "core/index/partials/shortcut.html" %}

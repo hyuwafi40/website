@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Dashboard{% endblock %}</title>
+        {% block meta %}{% endblock %}
+        {% load static %}
+        <link rel="stylesheet"
+              href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700&display=swap">
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="{% static 'css/core.css' %}">
+        {% block extra_css %}{% endblock %}
+    </head>
+    <body>
+        <div id="app-layout">
+            {% include "private/base/sidebar.html" %}
+            {% include "private/base/navbar.html" %}
+            <div id="main-wrapper">
+                <main id="main-content">
+                    <div class="content-inner">
+                        {% block content %}{% endblock %}
+                    </div>
+                    {% include "private/base/footer.html" %}
+                </main>
+            </div>
+        </div>
+        {% include "private/base/toast.html" %}
+        {% include "private/base/delete.html" %}
+        {% block modal %}{% endblock %}
+        <script src="{% static 'js/core.js' %}"></script>
+        {% block extra_js %}{% endblock %}
+    </body>
+</html>

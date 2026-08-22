@@ -1,0 +1,21 @@
+{% extends "private/base.html" %}
+{% load static %}
+{% block title %}Tag{% endblock %}
+{% block content %}
+    {% include "private/base/breadcrumb.html" %}
+    <div class="page-header">
+        <div>
+            <h2 class="page-title">Daftar Tag</h2>
+            <p class="page-subtitle">Kelola tag artikel</p>
+        </div>
+        <button type="button" class="btn btn-primary open-tag-modal">
+            <i class="fa-solid fa-plus"></i> Buat Tag
+        </button>
+    </div>
+    {% include "core/tag/table.html" %}
+    {% include "private/base/pagination.html" %}
+    {% include "core/tag/form.html" %}
+{% endblock %}
+{% block extra_js %}
+    <script src="{% static 'core/tag.js' %}"></script>
+{% endblock %}

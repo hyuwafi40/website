@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="id">
+      <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>{% block title %}{{ school.name|default:"Website Sekolah" }}{% endblock %}</title>
+            {% block meta %}
+                  <meta name="description"
+                        content="{% block meta_description %}{{ school.name|default:"Website Sekolah" }} - {{ school.motto|default:"Website resmi sekolah" }}{% endblock %}">
+                  <meta name="keywords"
+                        content="{% block meta_keywords %}{{ school.name|default:"sekolah" }}, blog sekolah, artikel, album, galeri, {{ brand.name|default:"" }}{% endblock %}">
+                  <meta name="author"
+                        content="{% block meta_author %}{{ brand.developer|default:"Admin Sekolah" }}{% endblock %}">
+                  <meta name="robots"
+                        content="{% block meta_robots %}index, follow{% endblock %}">
+                  <link rel="canonical"
+                        href="{% block canonical_url %}{{ request.scheme }}://{{ request.get_host }}{{ request.path }}{% endblock %}">
+                  <meta property="og:site_name"
+                        content="{% block og_site_name %}{{ school.name|default:"Website Sekolah" }}{% endblock %}">
+                  <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+                  <meta property="og:url"
+                        content="{% block og_url %}{{ request.scheme }}://{{ request.get_host }}{{ request.path }}{% endblock %}">
+                  <meta property="og:title"
+                        content="{% block og_title %}{{ school.name|default:"Website Sekolah" }}{% endblock %}">
+                  <meta property="og:description"
+                        content="{% block og_description %}{{ school.motto|default:"Website resmi sekolah" }}{% endblock %}">
+                  <meta property="og:locale"
+                        content="{% block og_locale %}id_ID{% endblock %}">
+                  <meta property="og:image" content="{% block og_image %}{% with site_logo=school.logo|default:brand.logo %}{% if site_logo %}{{ site_logo }}{% endif %}{% endwith %}{% endblock %}">
+                  <meta name="twitter:card"
+                        content="{% block twitter_card %}summary_large_image{% endblock %}">
+                  <meta name="twitter:url"
+                        content="{% block twitter_url %}{{ request.scheme }}://{{ request.get_host }}{{ request.path }}{% endblock %}">
+                  <meta name="twitter:title"
+                        content="{% block twitter_title %}{{ school.name|default:"Website Sekolah" }}{% endblock %}">
+                  <meta name="twitter:description"
+                        content="{% block twitter_description %}{{ school.motto|default:"Website resmi sekolah" }}{% endblock %}">
+                  <meta name="twitter:image" content="{% block twitter_image %}{% with site_logo=school.logo|default:brand.logo %}{% if site_logo %}{{ site_logo }}{% endif %}{% endwith %}{% endblock %}">
+                  {% with site_logo=school.logo|default:brand.logo %}
+                        {% if site_logo %}
+                              <link rel="icon" href="{{ site_logo }}" type="image/x-icon">
+                        {% endif %}
+                  {% endwith %}
+            {% endblock %}
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+            <link rel="preconnect" href="https://unpkg.com">
+            <link rel="stylesheet"
+                  href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700&display=swap">
+            <link rel="stylesheet"
+                  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+            <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+            {% block extra_css %}{% endblock %}
+      </head>
+      <body class="{% block body_class %}public-body{% endblock %}">
+            {% include "public/base/navbar.html" %}
+            {% if messages %}
+                  <div class="public-toast-container">
+                        {% for message in messages %}
+                              <div class="public-toast toast-{{ message.tags }}">{{ message }}</div>
+                        {% endfor %}
+                  </div>
+            {% endif %}
+            <main id="public-main" class="public-main">
+                  {% block content %}{% endblock %}
+            </main>
+            {% include "public/base/footer.html" %}
+            <script defer src="https://unpkg.com/htmx.org@2.0.1"></script>
+            <script defer src="{% static 'js/blog.js' %}"></script>
+            {% block extra_js %}{% endblock %}
+      </body>
+</html>

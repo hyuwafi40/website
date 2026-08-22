@@ -1,0 +1,55 @@
+{% if comments %}
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Artikel</th>
+                    <th>Nama Komentator</th>
+                    <th>Email</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for comment in comments %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ comment.article.title }}</td>
+                        <td>{{ comment.name }}</td>
+                        <td>{{ comment.email }}</td>
+                        <td>
+                            <span class="badge {% if comment.status == 'published' %}active{% else %}pending{% endif %}">
+                                {{ comment.get_status_display }}
+                            </span>
+                        </td>
+                        <td>
+                            <div class="table-actions">
+                                <button type="button"
+                                        class="btn-icon edit-comment-btn"
+                                        data-url="{% url 'core:comment_update_status' comment.pk %}"
+                                        data-status="{{ comment.status }}"
+                                        title="Ubah Status">
+                                    <i class="fa-solid fa-rotate"></i>
+                                </button>
+                                <button type="button"
+                                        class="btn-icon delete-btn"
+                                        data-url="{% url 'core:comment_delete' comment.pk %}"
+                                        data-title="{{ comment.name }}"
+                                        title="Hapus">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <div class="empty-state">
+        <i class="fa-solid fa-comments empty-icon"></i>
+        <h3 class="empty-title">Belum Ada Komentar</h3>
+        <p class="empty-desc">Belum ada komentar yang masuk.</p>
+    </div>
+{% endif %}

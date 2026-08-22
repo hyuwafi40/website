@@ -1,0 +1,20 @@
+{% extends "private/base.html" %}
+{% load static %}
+{% block title %}Halaman{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'core/page.css' %}">
+{% endblock %}
+{% block content %}
+    {% include "private/base/breadcrumb.html" %}
+    <div class="page-header">
+        <div>
+            <h2 class="page-title">Daftar Halaman</h2>
+            <p class="page-subtitle">Kelola halaman statis</p>
+        </div>
+        <a href="{% url 'core:page_create' %}" class="btn btn-primary">
+            <i class="fa-solid fa-plus"></i> Buat Halaman
+        </a>
+    </div>
+    {% include "core/page/table.html" %}
+    {% include "private/base/pagination.html" %}
+{% endblock %}

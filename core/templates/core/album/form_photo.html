@@ -1,0 +1,22 @@
+<form method="post"
+      action="{% url 'core:photo_create' album.slug %}"
+      class="photo-form">
+    {% csrf_token %}
+    <div class="photo-form-grid">
+        {% for field in form %}
+            <div class="input-group{% if field.name == 'caption' %} full{% endif %}">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.help_text %}
+                    <span class="field-help">{{ field.help_text }}</span>
+                {% endif %}
+                {% if field.errors %}
+                    <div class="field-error">{{ field.errors|striptags }}</div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+    <div class="btn-group">
+        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-upload"></i> Unggah</button>
+    </div>
+</form>

@@ -1,0 +1,33 @@
+<div class="modal-backdrop" id="heroModal">
+    <div class="modal">
+        <div class="modal-header">
+            <h2 id="heroModalTitle">Buat Hero</h2>
+            <button type="button" class="btn-icon" data-close-modal>
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form method="post"
+                  action="{% url 'core:hero_create' %}"
+                  data-create-url="{% url 'core:hero_create' %}"
+                  id="heroForm">
+                {% csrf_token %}
+                <div class="input-group">
+                    <label for="{{ form.name.id_for_label }}">{{ form.name.label }}</label>
+                    {{ form.name }}
+                    <div class="field-error" id="heroFormError"></div>
+                </div>
+                <div class="input-group">
+                    <label for="{{ form.photo.id_for_label }}">{{ form.photo.label }}</label>
+                    {{ form.photo }}
+                </div>
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa-solid fa-check"></i> Simpan
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-close-modal>Batal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

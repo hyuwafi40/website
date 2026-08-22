@@ -1,0 +1,24 @@
+{% extends "private/base.html" %}
+{% load static %}
+{% block title %}Iklan{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'core/advertisement.css' %}">
+{% endblock %}
+{% block content %}
+    {% include "private/base/breadcrumb.html" %}
+    <div class="page-header">
+        <div>
+            <h2 class="page-title">Daftar Iklan</h2>
+            <p class="page-subtitle">Kelola iklan</p>
+        </div>
+        <button type="button" class="btn btn-primary open-advertisement-modal">
+            <i class="fa-solid fa-plus"></i> Buat Iklan
+        </button>
+    </div>
+    {% include "core/advertisement/table.html" %}
+    {% include "private/base/pagination.html" %}
+    {% include "core/advertisement/form.html" %}
+{% endblock %}
+{% block extra_js %}
+    <script src="{% static 'core/advertisement.js' %}"></script>
+{% endblock %}

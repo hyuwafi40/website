@@ -1,0 +1,40 @@
+<form method="post" class="field-container field-fade-in">
+    {% csrf_token %}
+    <div class="field-header">
+        <div>
+            <h2 class="field-title">Edit Profil</h2>
+            <p class="field-subtitle">Perbarui informasi akun dan profil Anda</p>
+        </div>
+    </div>
+    {% for section in form_sections %}
+        <div class="field-card">
+            <div class="field-section-header">
+                <div class="field-section-icon">
+                    <i class="{{ section.icon }}"></i>
+                </div>
+                <div>
+                    <h3 class="field-section-title">{{ section.title }}</h3>
+                    <p class="field-section-desc">{{ section.desc }}</p>
+                </div>
+            </div>
+            <div class="field-form-grid">
+                {% for field in section.fields %}
+                    <div class="field-form-group{% if field.name == 'photo' or field.name == 'address' or field.name == 'bio' or field.name == 'password' %} full{% endif %}">
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.help_text %}
+                            <span class="field-help">{{ field.help_text }}</span>
+                        {% endif %}
+                        {% if field.errors %}
+                            <div class="field-error">{{ field.errors|striptags }}</div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+    <div class="field-actions">
+        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Simpan</button>
+        <a href="{% url 'core:profile' %}" class="btn btn-secondary">Batal</a>
+    </div>
+</form>

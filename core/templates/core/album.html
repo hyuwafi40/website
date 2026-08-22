@@ -1,0 +1,20 @@
+{% extends "private/base.html" %}
+{% load static %}
+{% block title %}Album{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'core/album.css' %}">
+{% endblock %}
+{% block content %}
+    {% include "private/base/breadcrumb.html" %}
+    <div class="page-header">
+        <div>
+            <h2 class="page-title">Daftar Album</h2>
+            <p class="page-subtitle">Kelola album Anda</p>
+        </div>
+        <a href="{% url 'core:album_create' %}" class="btn btn-primary">
+            <i class="fa-solid fa-folder-plus"></i> Buat Album
+        </a>
+    </div>
+    {% include "core/album/table.html" %}
+    {% include "private/base/pagination.html" %}
+{% endblock %}

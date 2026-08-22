@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login - {{ school.name }}</title>
+        {% load static %}
+        <link rel="stylesheet"
+              href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700&display=swap">
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="{% static 'css/core.css' %}">
+        <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    </head>
+    <body class="login-body">
+        <div id="page-loader" class="page-loader">
+            <i class="fa-solid fa-spinner fa-spin"></i>
+        </div>
+        <main class="login-main">
+            <section class="login-card">
+                <div class="login-info">
+                    <div class="login-school">
+                        {% if school.logo %}
+                            <img src="{{ school.logo }}"
+                                 alt="{{ school.name }}"
+                                 class="login-school-logo">
+                        {% else %}
+                            <i class="fa-solid fa-school login-school-icon"></i>
+                        {% endif %}
+                        <h1>{{ school.name }}</h1>
+                        <p>{{ school.address }}</p>
+                    </div>
+                    <div class="login-brand">
+                        <span>{{ brand.name }}</span>
+                        <span>{{ brand.version }}</span>
+                        <span>{{ brand.developer }}</span>
+                    </div>
+                </div>
+                <div class="login-form-panel">
+                    <h2>Selamat Datang</h2>
+                    <p>Silakan masuk menggunakan akun Anda.</p>
+                    {% if messages %}
+                        <div class="login-messages">
+                            {% for message in messages %}
+                                <div class="login-alert login-alert-{{ message.tags }}">
+                                    <i class="fa-solid {% if message.tags == 'success' %}fa-circle-check{% elif message.tags == 'error' %}fa-circle-xmark{% elif message.tags == 'warning' %}fa-triangle-exclamation{% else %}fa-circle-info{% endif %}"></i>
+                                    <span>{{ message }}</span>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    <form method="post" action="" id="login-form" autocomplete="on">
+                        {% csrf_token %}
+                        <div class="input-group">
+                            <label for="username">Username</label>
+                            <input type="text"
+                                   name="username"
+                                   id="username"
+                                   class="form-control"
+                                   placeholder="Masukkan username"
+                                   required
+                                   autocomplete="username">
+                        </div>
+                        <div class="input-group">
+                            <label for="password">Password</label>
+                            <input type="password"
+                                   name="password"
+                                   id="password"
+                                   class="form-control"
+                                   placeholder="Masukkan password"
+                                   required
+                                   autocomplete="current-password">
+                        </div>
+                        <button type="submit" id="login-btn" class="btn btn-primary login-btn">
+                            <span class="btn-text">Masuk</span>
+                        </button>
+                    </form>
+                </div>
+            </section>
+        </main>
+        <script src="{% static 'js/login.js' %}"></script>
+    </body>
+</html>

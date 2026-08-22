@@ -1,0 +1,18 @@
+{% extends "private/base.html" %}
+{% load static %}
+{% block title %}Komentar{% endblock %}
+{% block content %}
+    {% include "private/base/breadcrumb.html" %}
+    <div class="page-header">
+        <div>
+            <h2 class="page-title">Daftar Komentar</h2>
+            <p class="page-subtitle">Kelola komentar masuk</p>
+        </div>
+    </div>
+    {% include "core/comment/table.html" %}
+    {% include "private/base/pagination.html" %}
+    {% include "core/comment/form.html" %}
+{% endblock %}
+{% block extra_js %}
+    <script src="{% static 'core/comment.js' %}"></script>
+{% endblock %}

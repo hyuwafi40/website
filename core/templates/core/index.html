@@ -1,0 +1,22 @@
+{% extends "private/base.html" %}
+{% load static %}
+{% block title %}Dashboard{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'core/index.css' %}">
+{% endblock %}
+{% block content %}
+    {% include "private/base/breadcrumb.html" %}
+    <div id="skeleton-wrapper">{% include "core/index/skeleton.html" %}</div>
+    <div id="dashboard-content" class="dashboard-content-hidden">
+        {% if is_developer %}
+            {% include "core/index/developer.html" %}
+        {% elif is_administrator %}
+            {% include "core/index/administrator.html" %}
+        {% else %}
+            {% include "core/index/reguler.html" %}
+        {% endif %}
+    </div>
+{% endblock %}
+{% block extra_js %}
+    <script src="{% static 'core/index.js' %}"></script>
+{% endblock %}

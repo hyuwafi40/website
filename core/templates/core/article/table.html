@@ -1,0 +1,68 @@
+{% if articles %}
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Judul</th>
+                    <th>Penulis</th>
+                    <th>Status</th>
+                    <th>Dibuat Pada</th>
+                    <th>Diperbarui Pada</th>
+                    <th>Total Komen</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for article in articles %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ article.title }}</td>
+                        <td>{{ article.created_by }}</td>
+                        <td>
+                            <span class="badge {% if article.status == 'published' %}active{% else %}pending{% endif %}">
+                                {{ article.get_status_display }}
+                            </span>
+                        </td>
+                        <td>{{ article.created_at|date:"d M Y H:i" }}</td>
+                        <td>{{ article.updated_at|date:"d M Y H:i" }}</td>
+                        <td>{{ article.comment_count }}</td>
+                        <td>
+                            {% if article.can_manage %}
+                                <div class="table-actions">
+                                    <form method="post" action="{% url 'core:article_toggle' article.slug %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn-icon" title="Ubah Status">
+                                            <i class="fa-solid fa-rotate"></i>
+                                        </button>
+                                    </form>
+                                    <a href="{% url 'core:article_edit' article.slug %}"
+                                       class="btn-icon"
+                                       title="Edit">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </a>
+                                    <button type="button"
+                                            class="btn-icon delete-btn"
+                                            data-url="{% url 'core:article_delete' article.slug %}"
+                                            data-title="{{ article.title }}"
+                                            title="Hapus">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <div class="empty-state">
+        <i class="fa-solid fa-newspaper empty-icon"></i>
+        <h3 class="empty-title">Belum Ada Artikel</h3>
+        <p class="empty-desc">Anda belum memiliki artikel. Mulai buat artikel pertama Anda.</p>
+        <a href="{% url 'core:article_create' %}" class="btn btn-primary">
+            <i class="fa-solid fa-pen-to-square"></i> Buat Artikel
+        </a>
+    </div>
+{% endif %}

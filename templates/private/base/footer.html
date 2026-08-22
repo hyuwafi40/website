@@ -1,0 +1,36 @@
+<footer>
+    <div class="footer-left">
+        <span>&copy; {% now "Y" %} {{ brand.name }}</span>
+        <span>{{ brand.developer }}</span>
+    </div>
+    <div class="footer-center">
+        <span>{{ school.name }}</span>
+    </div>
+    <div class="footer-right">
+        <span class="footer-version">{{ brand.version }}</span>
+        {% if brand.instagram %}
+            <a href="{{ brand.instagram }}"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="footer-social"><i class="fa-brands fa-instagram"></i></a>
+        {% endif %}
+        {% if brand.youtube %}
+            <a href="{{ brand.youtube }}"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="footer-social"><i class="fa-brands fa-youtube"></i></a>
+        {% endif %}
+        {% if brand.tiktok %}
+            <a href="{{ brand.tiktok }}"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="footer-social"><i class="fa-brands fa-tiktok"></i></a>
+        {% endif %}
+        {% if brand.facebook %}
+            <a href="{{ brand.facebook }}"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="footer-social"><i class="fa-brands fa-facebook"></i></a>
+        {% endif %}
+    </div>
+</footer>

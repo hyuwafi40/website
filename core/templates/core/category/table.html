@@ -1,0 +1,48 @@
+{% if categories %}
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for category in categories %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ category.name }}</td>
+                        <td>
+                            <div class="table-actions">
+                                <button type="button"
+                                        class="btn-icon edit-category-btn"
+                                        data-url="{% url 'core:category_edit' category.slug %}"
+                                        data-name="{{ category.name }}"
+                                        title="Edit">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+                                <button type="button"
+                                        class="btn-icon delete-btn"
+                                        data-url="{% url 'core:category_delete' category.slug %}"
+                                        data-title="{{ category.name }}"
+                                        title="Hapus">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <div class="empty-state">
+        <i class="fa-solid fa-tags empty-icon"></i>
+        <h3 class="empty-title">Belum Ada Kategori</h3>
+        <p class="empty-desc">Mulai buat kategori pertama Anda.</p>
+        <button type="button" class="btn btn-primary open-category-modal">
+            <i class="fa-solid fa-plus"></i> Buat Kategori
+        </button>
+    </div>
+{% endif %}

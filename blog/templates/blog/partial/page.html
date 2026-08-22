@@ -1,0 +1,48 @@
+<div class="container search-header reveal">
+    <h1 class="section-title">Halaman</h1>
+    <p class="page-subtitle">Daftar halaman resmi sekolah.</p>
+</div>
+<div class="container">
+    <div class="page-grid">
+        {% for page in pages %}
+            <article class="page-card reveal stagger-{{ forloop.counter0|divisibleby:3|yesno:"1,2,3" }}">
+                <a href="{% url 'blog:page_detail' page.slug %}"
+                   class="page-card-link"
+                   hx-get="{% url 'blog:page_detail' page.slug %}"
+                   hx-target="#public-main"
+                   hx-push-url="true">
+                    {% if page.thumbnail %}
+                        <img src="{{ page.thumbnail }}"
+                             alt="{{ page.title }}"
+                             class="page-card-image"
+                             loading="lazy">
+                    {% else %}
+                        <div class="page-card-image page-card-fallback">
+                            <i class="fa-solid fa-file-lines"></i>
+                        </div>
+                    {% endif %}
+                    <div class="page-card-body">
+                        <div class="card-meta">
+                            <span><i class="fa-regular fa-calendar icon-primary"></i> {{ page.created_at|date:"d F Y" }}</span>
+                            <span><i class="fa-solid fa-user"></i> {{ page.created_by|default:"-" }}</span>
+                        </div>
+                        <h3 class="page-card-title">{{ page.title }}</h3>
+                        <p class="page-card-excerpt">{{ page.content|striptags|truncatechars:120 }}</p>
+                    </div>
+                </a>
+            </article>
+        {% empty %}
+            <div class="state-container">
+                <i class="fa-solid fa-file-lines state-icon"></i>
+                <h2 class="section-title">Belum Ada Halaman</h2>
+                <p>Belum ada halaman yang dibuat.</p>
+                <a href="{% url 'blog:article_list' %}"
+                   class="btn btn-outline"
+                   hx-get="{% url 'blog:article_list' %}"
+                   hx-target="#public-main"
+                   hx-push-url="true">Lihat Artikel</a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% include "public/base/pagination.html" %}

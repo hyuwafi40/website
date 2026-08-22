@@ -1,0 +1,117 @@
+<div class="container">
+    <div class="article-layout">
+        <div class="article-detail-main">
+            <article class="article-header reveal">
+                {% if article.thumbnail %}
+                    <img src="{{ article.thumbnail }}"
+                         alt="{{ article.title }}"
+                         class="article-featured-img">
+                {% else %}
+                    <div class="article-featured-img article-detail-fallback">
+                        <i class="fa-solid fa-newspaper"></i>
+                    </div>
+                {% endif %}
+                <div class="card-meta">
+                    <span><i class="fa-regular fa-calendar icon-primary"></i> {{ article.created_at|date:"d F Y" }}</span>
+                    {% if article.updated_at and article.updated_at != article.created_at %}
+                        <span><i class="fa-solid fa-clock-rotate-left"></i> Diperbarui {{ article.updated_at|date:"d F Y" }}</span>
+                    {% endif %}
+                    <span><i class="fa-solid fa-user"></i> {{ article.created_by|default:"-" }}</span>
+                    {% if article.category %}
+                        <span><i class="fa-solid fa-folder"></i> {{ article.category.name }}</span>
+                    {% endif %}
+                    <span><i class="fa-solid fa-comments"></i> {{ published_comment_count }} komentar</span>
+                </div>
+                <h1 class="article-title">{{ article.title }}</h1>
+                <div class="article-share">
+                    <span class="article-share-label">Bagikan:</span>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ share_url|urlencode }}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="share-btn share-facebook"
+                       aria-label="Bagikan ke Facebook">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                    <a href="https://twitter.com/intent/tweet?url={{ share_url|urlencode }}&text={{ article.title|urlencode }}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="share-btn share-twitter"
+                       aria-label="Bagikan ke Twitter">
+                        <i class="fa-brands fa-x-twitter"></i>
+                    </a>
+                    <a href="https://api.whatsapp.com/send?text={{ article.title|urlencode }}%20{{ share_url|urlencode }}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="share-btn share-whatsapp"
+                       aria-label="Bagikan ke WhatsApp">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                    <a href="https://t.me/share/url?url={{ share_url|urlencode }}&text={{ article.title|urlencode }}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="share-btn share-telegram"
+                       aria-label="Bagikan ke Telegram">
+                        <i class="fa-brands fa-telegram"></i>
+                    </a>
+                    <button type="button"
+                            class="share-btn share-copy"
+                            data-copy-url="{{ share_url }}"
+                            aria-label="Salin tautan">
+                        <i class="fa-solid fa-link"></i>
+                    </button>
+                </div>
+                <div class="article-body">{{ article.content|safe }}</div>
+            </article>
+            <section id="comment-section" class="article-comments">
+                {% include "blog/partial/detail/comments.html" %}
+            </section>
+        </div>
+        <aside class="article-sidebar">
+            {% if rectangle_ad %}
+                <div class="ads-slot ads-rectangle">
+                    <a href="{{ rectangle_ad.link }}"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        <img src="{{ rectangle_ad.image }}"
+                             alt="{{ rectangle_ad.get_type_display }}">
+                    </a>
+                </div>
+            {% else %}
+                <div class="ads-slot ads-rectangle">
+                    <span>Iklan</span>
+                </div>
+            {% endif %}
+            <div class="glass-panel glass-panel-mt">
+                <h3 class="widget-title">Kategori</h3>
+                <div class="category-list">
+                    {% for category in categories|slice:":6" %}
+                        <a href="{% url 'blog:category_detail' category.slug %}"
+                           class="category-item"
+                           hx-get="{% url 'blog:category_detail' category.slug %}"
+                           hx-target="#public-main"
+                           hx-push-url="true">
+                            <span>{{ category.name }}</span>
+                        </a>
+                    {% empty %}
+                        <p>Belum ada kategori.</p>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="glass-panel glass-panel-mt">
+                <h3 class="widget-title">Artikel Terbaru</h3>
+                {% for recent in recent_articles %}
+                    <div>
+                        <a href="{% url 'blog:article_detail' recent.slug %}"
+                           class="card-title sidebar-link"
+                           hx-get="{% url 'blog:article_detail' recent.slug %}"
+                           hx-target="#public-main"
+                           hx-push-url="true">{{ recent.title }}</a>
+                        <p class="card-meta">{{ recent.created_at|date:"d M Y" }}</p>
+                    </div>
+                {% empty %}
+                    <p>Belum ada artikel.</p>
+                {% endfor %}
+            </div>
+        </aside>
+    </div>
+</div>

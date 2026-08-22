@@ -1,0 +1,27 @@
+.page-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.page-form-header {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.page-form-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+}
+
+.page-form-grid .input-group.full {
+    grid-column: 1 / -1;
+}
+
+@media (min-width: 768px) {
+    .page-form-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

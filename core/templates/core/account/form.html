@@ -1,0 +1,60 @@
+<div class="modal-backdrop" id="accountModal">
+    <div class="modal">
+        <div class="modal-header">
+            <h2 id="accountModalTitle">Buat Pengguna</h2>
+            <button type="button" class="btn-icon" data-close-modal>
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form method="post"
+                  action="{% url 'core:account_create' %}"
+                  data-create-url="{% url 'core:account_create' %}"
+                  id="accountForm">
+                {% csrf_token %}
+                <div class="input-group">
+                    <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+                    {{ form.username }}
+                    <div class="field-error" id="accountFormError"></div>
+                </div>
+                <div class="input-group">
+                    <label for="{{ form.first_name.id_for_label }}">{{ form.first_name.label }}</label>
+                    {{ form.first_name }}
+                </div>
+                <div class="input-group">
+                    <label for="{{ form.last_name.id_for_label }}">{{ form.last_name.label }}</label>
+                    {{ form.last_name }}
+                </div>
+                <div class="input-group">
+                    <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+                    {{ form.email }}
+                </div>
+                <div class="input-group">
+                    <label for="{{ form.job.id_for_label }}">{{ form.job.label }}</label>
+                    {{ form.job }}
+                </div>
+                <div class="input-group">
+                    <label for="{{ form.photo.id_for_label }}">{{ form.photo.label }}</label>
+                    {{ form.photo }}
+                </div>
+                <div class="input-group">
+                    <label for="{{ form.gender.id_for_label }}">{{ form.gender.label }}</label>
+                    {{ form.gender }}
+                </div>
+                <div class="input-group">
+                    <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
+                    {{ form.password }}
+                    {% if form.password.help_text %}
+                        <span class="field-help">{{ form.password.help_text }}</span>
+                    {% endif %}
+                </div>
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa-solid fa-check"></i> Simpan
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-close-modal>Batal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

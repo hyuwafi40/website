@@ -1,0 +1,74 @@
+{% if advertisements %}
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Type</th>
+                    <th>Preview Image</th>
+                    <th>Link</th>
+                    <th>Enddate</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ad in advertisements %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ ad.get_type_display }}</td>
+                        <td>
+                            {% if ad.image %}
+                                <img src="{{ ad.image }}"
+                                     alt="{{ ad.get_type_display }}"
+                                     class="advertisement-preview-image">
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{{ ad.link }}" target="_blank" rel="noopener noreferrer">{{ ad.link }}</a>
+                        </td>
+                        <td>{{ ad.enddate|date:"d M Y H:i" }}</td>
+                        <td>
+                            <span class="badge {% if ad.status == 'active' %}active{% else %}inactive{% endif %}">
+                                {{ ad.get_status_display }}
+                            </span>
+                        </td>
+                        <td>
+                            <div class="table-actions">
+                                <button type="button"
+                                        class="btn-icon edit-advertisement-btn"
+                                        data-url="{% url 'core:advertisement_edit' ad.slug %}"
+                                        data-type="{{ ad.type }}"
+                                        data-image="{{ ad.image }}"
+                                        data-link="{{ ad.link }}"
+                                        data-enddate="{{ ad.enddate|date:'Y-m-d\TH:i' }}"
+                                        data-status="{{ ad.status }}"
+                                        title="Edit">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+                                <button type="button"
+                                        class="btn-icon delete-btn"
+                                        data-url="{% url 'core:advertisement_delete' ad.slug %}"
+                                        data-title="{{ ad.get_type_display }}"
+                                        title="Hapus">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <div class="empty-state">
+        <i class="fa-solid fa-rectangle-ad empty-icon"></i>
+        <h3 class="empty-title">Belum Ada Iklan</h3>
+        <p class="empty-desc">Mulai buat iklan pertama Anda.</p>
+        <button type="button" class="btn btn-primary open-advertisement-modal">
+            <i class="fa-solid fa-plus"></i> Buat Iklan
+        </button>
+    </div>
+{% endif %}

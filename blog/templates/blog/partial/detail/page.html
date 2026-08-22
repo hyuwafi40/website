@@ -1,0 +1,29 @@
+<article class="container page-detail-container reveal">
+    <div class="page-detail-header">
+        {% if page.thumbnail %}
+            <img src="{{ page.thumbnail }}"
+                 alt="{{ page.title }}"
+                 class="page-detail-image">
+        {% else %}
+            <div class="page-detail-image page-detail-fallback">
+                <i class="fa-solid fa-file-lines"></i>
+            </div>
+        {% endif %}
+        <h1 class="article-title">{{ page.title }}</h1>
+        <div class="card-meta">
+            <span><i class="fa-regular fa-calendar icon-primary"></i> {{ page.created_at|date:"d F Y" }}</span>
+            <span><i class="fa-solid fa-user"></i> {{ page.created_by|default:"-" }}</span>
+            {% if page.category %}
+                <span><i class="fa-solid fa-folder"></i> {{ page.category.name }}</span>
+            {% endif %}
+        </div>
+        {% if page.tags.all %}
+            <div class="page-tags">
+                {% for tag in page.tags.all %}
+                    <span class="badge badge-sky">{{ tag.name }}</span>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+    <div class="page-detail-content article-body">{{ page.content|safe }}</div>
+</article>

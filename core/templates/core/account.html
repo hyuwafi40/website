@@ -1,0 +1,24 @@
+{% extends "private/base.html" %}
+{% load static %}
+{% block title %}Pengguna{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'core/account.css' %}">
+{% endblock %}
+{% block content %}
+    {% include "private/base/breadcrumb.html" %}
+    <div class="page-header">
+        <div>
+            <h2 class="page-title">Daftar Pengguna</h2>
+            <p class="page-subtitle">Kelola akun pengguna</p>
+        </div>
+        <button type="button" class="btn btn-primary open-account-modal">
+            <i class="fa-solid fa-plus"></i> Buat Pengguna
+        </button>
+    </div>
+    {% include "core/account/table.html" %}
+    {% include "private/base/pagination.html" %}
+    {% include "core/account/form.html" %}
+{% endblock %}
+{% block extra_js %}
+    <script src="{% static 'core/account.js' %}"></script>
+{% endblock %}

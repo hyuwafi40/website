@@ -1,0 +1,51 @@
+<h2 class="widget-title">Komentar</h2>
+{% if form_success %}
+    <div class="comment-success">
+        <i class="fa-solid fa-circle-check"></i>
+        <span>Komentar berhasil dikirim dan menunggu moderasi.</span>
+    </div>
+{% endif %}
+{% for comment in comments %}
+    <div class="glass-panel glass-panel-sm">
+        <strong>{{ comment.name }}</strong>
+        <p>{{ comment.content|linebreaks }}</p>
+    </div>
+{% empty %}
+    <div class="state-container">
+        <i class="fa-solid fa-comments state-icon"></i>
+        <h3>Belum Ada Komentar</h3>
+        <p>Jadilah yang pertama berkomentar.</p>
+    </div>
+{% endfor %}
+<form method="post"
+      action="{% url 'blog:comment_create' article.slug %}"
+      class="comment-form"
+      hx-post="{% url 'blog:comment_create' article.slug %}"
+      hx-target="#comment-section"
+      hx-swap="outerHTML">
+    {% csrf_token %}
+    <div class="comment-form-grid">
+        <div class="input-group">
+            <label for="{{ form.name.id_for_label }}">{{ form.name.label }}</label>
+            {{ form.name }}
+            {% if form.name.errors %}
+                <div class="field-error">{{ form.name.errors|striptags }}</div>
+            {% endif %}
+        </div>
+        <div class="input-group">
+            <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+            {{ form.email }}
+            {% if form.email.errors %}
+                <div class="field-error">{{ form.email.errors|striptags }}</div>
+            {% endif %}
+        </div>
+        <div class="input-group full">
+            <label for="{{ form.content.id_for_label }}">{{ form.content.label }}</label>
+            {{ form.content }}
+            {% if form.content.errors %}
+                <div class="field-error">{{ form.content.errors|striptags }}</div>
+            {% endif %}
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Kirim Komentar</button>
+</form>

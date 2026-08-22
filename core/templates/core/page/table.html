@@ -1,0 +1,54 @@
+{% if pages %}
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Judul</th>
+                    <th>Kategori</th>
+                    <th>Tag</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for page in pages %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ page.title }}</td>
+                        <td>{{ page.category.name }}</td>
+                        <td>
+                            {% for tag in page.tags.all %}
+                                {{ tag.name }}{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>
+                            <div class="table-actions">
+                                <a href="{% url 'core:page_edit' page.slug %}"
+                                   class="btn-icon"
+                                   title="Edit">
+                                    <i class="fa-solid fa-pen"></i>
+                                </a>
+                                <button type="button"
+                                        class="btn-icon delete-btn"
+                                        data-url="{% url 'core:page_delete' page.slug %}"
+                                        data-title="{{ page.title }}"
+                                        title="Hapus">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <div class="empty-state">
+        <i class="fa-solid fa-file-lines empty-icon"></i>
+        <h3 class="empty-title">Belum Ada Halaman</h3>
+        <p class="empty-desc">Mulai buat halaman pertama Anda.</p>
+        <a href="{% url 'core:page_create' %}" class="btn btn-primary">
+            <i class="fa-solid fa-plus"></i> Buat Halaman
+        </a>
+    </div>
+{% endif %}

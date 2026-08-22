@@ -1,0 +1,21 @@
+<div class="resource-card">
+    <div class="resource-card-header">
+        <div class="resource-card-icon">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+        </div>
+        <div>
+            <h4 class="resource-card-title">Reset</h4>
+            <p class="resource-card-desc">Hapus semua data konten tanpa menghapus akun dan profil.</p>
+        </div>
+    </div>
+    <form method="post"
+          action="{% url 'core:resources_reset' %}"
+          class="resource-form"
+          data-resource-form
+          data-confirm="Apakah Anda yakin ingin mereset semua data konten?">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">
+            <i class="fa-solid fa-triangle-exclamation"></i> Reset Semua Data Konten
+        </button>
+    </form>
+</div>

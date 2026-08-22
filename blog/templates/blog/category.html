@@ -1,0 +1,10 @@
+{% extends "public/base.html" %}
+{% block title %}Kategori - {{ school.name }}{% endblock %}
+{% block meta_description %}{{ meta_description }}{% endblock %}
+{% block og_title %}Kategori - {{ school.name }}{% endblock %}
+{% block og_description %}{{ meta_description }}{% endblock %}
+{% block twitter_title %}Kategori - {{ school.name }}{% endblock %}
+{% block twitter_description %}{{ meta_description }}{% endblock %}
+{% block content %}
+    {% include "blog/partial/category.html" %}
+{% endblock %}

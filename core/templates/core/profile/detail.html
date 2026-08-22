@@ -1,0 +1,199 @@
+<div class="field-container field-fade-in">
+    <div class="field-header">
+        <div>
+            <h2 class="field-title">Profil Saya</h2>
+            <p class="field-subtitle">{{ account.get_full_name|default:account.username }}</p>
+        </div>
+        <a href="{% url 'core:profile_edit' %}" class="btn btn-primary">
+            <i class="fa-solid fa-pen-to-square"></i> Edit Profil
+        </a>
+    </div>
+    <div class="field-card">
+        <div class="field-avatar-wrapper">
+            <div class="field-avatar">
+                {% if profile.photo %}
+                    <img src="{{ profile.photo }}" alt="{{ account.get_full_name }}">
+                {% else %}
+                    <i class="fa-solid fa-user"></i>
+                {% endif %}
+            </div>
+            <div class="field-avatar-info">
+                <span class="field-avatar-name">{{ account.get_full_name|default:account.username }}</span>
+                <span class="field-avatar-role">{{ account.get_job_display|default:"-" }}</span>
+                <span class="field-avatar-email">{{ account.email|default:"-" }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="field-grid">
+        <div class="field-card">
+            <div class="field-section-header">
+                <div class="field-section-icon">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div>
+                    <h3 class="field-section-title">Akun</h3>
+                    <p class="field-section-desc">Informasi dasar akun</p>
+                </div>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Username</span>
+                <span class="field-value">{{ account.username|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Nama Lengkap</span>
+                <span class="field-value">{{ account.get_full_name|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Email</span>
+                <span class="field-value">{{ account.email|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Jabatan</span>
+                <span class="field-value">{{ account.get_job_display|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Terakhir Login</span>
+                <span class="field-value">{{ account.last_login|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Bergabung</span>
+                <span class="field-value">{{ account.date_joined|date:"d F Y" }}</span>
+            </div>
+        </div>
+        <div class="field-card">
+            <div class="field-section-header">
+                <div class="field-section-icon">
+                    <i class="fa-solid fa-address-book"></i>
+                </div>
+                <div>
+                    <h3 class="field-section-title">Kontak</h3>
+                    <p class="field-section-desc">Nomor telepon dan website</p>
+                </div>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Telepon</span>
+                <span class="field-value">{{ profile.phone|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Mobile</span>
+                <span class="field-value">{{ profile.mobile|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Website</span>
+                <span class="field-value">{{ profile.website|default:"-" }}</span>
+            </div>
+        </div>
+        <div class="field-card">
+            <div class="field-section-header">
+                <div class="field-section-icon">
+                    <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <div>
+                    <h3 class="field-section-title">Alamat</h3>
+                    <p class="field-section-desc">Lokasi tempat tinggal</p>
+                </div>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Alamat</span>
+                <span class="field-value">{{ profile.address|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Kota</span>
+                <span class="field-value">{{ profile.city|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Provinsi</span>
+                <span class="field-value">{{ profile.province|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Negara</span>
+                <span class="field-value">{{ profile.country|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Kode Pos</span>
+                <span class="field-value">{{ profile.postal_code|default:"-" }}</span>
+            </div>
+        </div>
+        <div class="field-card">
+            <div class="field-section-header">
+                <div class="field-section-icon">
+                    <i class="fa-solid fa-id-card"></i>
+                </div>
+                <div>
+                    <h3 class="field-section-title">Data Pribadi</h3>
+                    <p class="field-section-desc">Tanggal lahir, gender, bio</p>
+                </div>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Tanggal Lahir</span>
+                <span class="field-value">{{ profile.birth_date|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Jenis Kelamin</span>
+                <span class="field-value">{{ profile.get_gender_display|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Bio</span>
+                <span class="field-value">{{ profile.bio|default:"-" }}</span>
+            </div>
+        </div>
+        <div class="field-card">
+            <div class="field-section-header">
+                <div class="field-section-icon">
+                    <i class="fa-solid fa-briefcase"></i>
+                </div>
+                <div>
+                    <h3 class="field-section-title">Pekerjaan</h3>
+                    <p class="field-section-desc">Informasi pekerjaan dan perusahaan</p>
+                </div>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Pekerjaan</span>
+                <span class="field-value">{{ profile.occupation|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Perusahaan</span>
+                <span class="field-value">{{ profile.company|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Departemen</span>
+                <span class="field-value">{{ profile.department|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">ID Karyawan</span>
+                <span class="field-value">{{ profile.employee_id|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Tanggal Bergabung</span>
+                <span class="field-value">{{ profile.joined_at|default:"-" }}</span>
+            </div>
+        </div>
+        <div class="field-card">
+            <div class="field-section-header">
+                <div class="field-section-icon">
+                    <i class="fa-solid fa-share-nodes"></i>
+                </div>
+                <div>
+                    <h3 class="field-section-title">Media Sosial</h3>
+                    <p class="field-section-desc">Akun media sosial</p>
+                </div>
+            </div>
+            <div class="field-row">
+                <span class="field-label">LinkedIn</span>
+                <span class="field-value">{{ profile.linkedin|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">GitHub</span>
+                <span class="field-value">{{ profile.github|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Twitter</span>
+                <span class="field-value">{{ profile.twitter|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Instagram</span>
+                <span class="field-value">{{ profile.instagram|default:"-" }}</span>
+            </div>
+        </div>
+    </div>
+</div>

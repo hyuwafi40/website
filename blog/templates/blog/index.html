@@ -1,0 +1,17 @@
+{% extends "public/base.html" %}
+{% load static %}
+{% block title %}Beranda - {{ school.name }}{% endblock %}
+{% block meta_description %}{{ meta_description }}{% endblock %}
+{% block og_title %}{{ school.name|default:"Website Sekolah" }}{% endblock %}
+{% block og_description %}{{ meta_description }}{% endblock %}
+{% block twitter_title %}{{ school.name|default:"Website Sekolah" }}{% endblock %}
+{% block twitter_description %}{{ meta_description }}{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'blog/index.css' %}">
+{% endblock %}
+{% block content %}
+    {% include "blog/partial/index.html" %}
+{% endblock %}
+{% block extra_js %}
+    <script src="{% static 'blog/index.js' %}"></script>
+{% endblock %}

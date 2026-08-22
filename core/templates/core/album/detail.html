@@ -1,0 +1,54 @@
+{% extends "private/base.html" %}
+{% load static %}
+{% block title %}Album {{ album.title }}{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'core/album.css' %}">
+{% endblock %}
+{% block content %}
+    {% include "private/base/breadcrumb.html" %}
+    <div class="page-header">
+        <div>
+            <h2 class="page-title">{{ album.title }}</h2>
+            <p class="page-subtitle">{{ album.description|default:"-" }}</p>
+        </div>
+        <a href="{% url 'core:album_list' %}" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> Kembali</a>
+    </div>
+    {% if photos %}
+        <div class="gallery-grid">
+            {% for photo in photos %}
+                <figure class="gallery-item">
+                    <img src="{{ photo.photo }}"
+                         alt="{{ photo.title }}"
+                         class="gallery-image"
+                         data-url="{{ photo.photo }}"
+                         data-title="{{ photo.title }}"
+                         data-caption="{{ photo.caption }}">
+                    <figcaption class="gallery-caption">
+                        <span>{{ photo.title }}</span>
+                        <form method="post" action="{% url 'core:photo_delete' photo.slug %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-icon danger" title="Hapus">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </form>
+                    </figcaption>
+                </figure>
+            {% endfor %}
+        </div>
+        {% include "private/base/pagination.html" %}
+    {% else %}
+        <div class="empty-state">
+            <i class="fa-solid fa-image empty-icon"></i>
+            <h3 class="empty-title">Belum Ada Foto</h3>
+            <p class="empty-desc">Album ini masih kosong. Unggah foto pertama Anda.</p>
+        </div>
+    {% endif %}
+    <div class="section-block">
+        <h3 class="section-title">Unggah Foto</h3>
+        {% include "core/album/form_photo.html" %}
+    </div>
+    {% include "core/album/preview.html" %}
+{% endblock %}
+{% block extra_js %}
+    <script src="{% static 'core/album.js' %}"></script>
+{% endblock %}

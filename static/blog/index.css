@@ -1,0 +1,254 @@
+.hero-fallback {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent-1));
+    border-radius: var(--radius-lg);
+    padding: var(--space-6) var(--space-4);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+}
+
+.hero-fallback i {
+    font-size: 6rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.index-hero-carousel {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+    background: var(--color-primary);
+}
+
+.index-hero-slide {
+    display: none;
+    position: relative;
+}
+
+.index-hero-slide.active {
+    display: block;
+    animation: fadeIn 400ms var(--ease-out);
+}
+
+.index-hero-slide img {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+}
+
+.index-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(15, 23, 42, 0.8), transparent 60%);
+    display: flex;
+    align-items: flex-end;
+    padding: var(--space-5);
+    color: white;
+}
+
+.index-hero-overlay h2 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.index-hero-controls {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 var(--space-3);
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.index-hero-btn {
+    pointer-events: auto;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-pill);
+    border: none;
+    background: rgba(255, 255, 255, 0.8);
+    color: var(--color-dark);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+}
+
+.index-hero-btn:hover {
+    background: #ffffff;
+}
+
+.index-hero-dots {
+    position: absolute;
+    bottom: var(--space-3);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: var(--space-2);
+}
+
+.index-hero-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+}
+
+.index-hero-dot.active {
+    background: #ffffff;
+}
+
+.school-stats-section {
+    margin-bottom: var(--space-6);
+}
+
+.school-stats {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+}
+
+.stat-card {
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: var(--glass-blur);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--glass-shadow);
+    padding: var(--space-4);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.stat-card i {
+    font-size: 2rem;
+    color: var(--color-primary);
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--color-dark);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    font-weight: 600;
+}
+
+.school-info-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+}
+
+.school-info-card {
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+}
+
+.school-info-title {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--color-dark);
+    margin-bottom: var(--space-2);
+}
+
+.vision-mission-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+}
+
+.vision-mission-card {
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+}
+
+.mini-article-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+}
+
+.mini-article-card {
+    display: block;
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: var(--glass-blur);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--glass-shadow);
+    padding: var(--space-4);
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition-smooth);
+}
+
+.mini-article-card:hover {
+    background: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px -10px rgba(79, 70, 229, 0.2);
+}
+
+.mini-article-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--color-dark);
+    margin: var(--space-2) 0;
+}
+
+.mini-article-meta {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@media (min-width: 768px) {
+    .school-stats {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .school-info-grid,
+    .vision-mission-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .mini-article-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .school-stats {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}

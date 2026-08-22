@@ -1,0 +1,36 @@
+{% extends "private/base.html" %}
+{% load static %}
+{% block title %}{{ page_heading }}{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'core/album.css' %}">
+{% endblock %}
+{% block content %}
+    {% include "private/base/breadcrumb.html" %}
+    <div class="album-form">
+        <div class="album-form-header">
+            <h2 class="album-title">{{ page_heading }}</h2>
+            <p class="album-subtitle">Form album</p>
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            <div class="album-form-grid">
+                {% for field in form %}
+                    <div class="input-group{% if field.name == 'description' %} full{% endif %}">
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.help_text %}
+                            <span class="field-help">{{ field.help_text }}</span>
+                        {% endif %}
+                        {% if field.errors %}
+                            <div class="field-error">{{ field.errors|striptags }}</div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="btn-group">
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Simpan</button>
+                <a href="{% url 'core:album_list' %}" class="btn btn-secondary">Batal</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

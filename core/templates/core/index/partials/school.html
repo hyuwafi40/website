@@ -1,0 +1,16 @@
+<div class="section-block">
+    <h3 class="section-title">Informasi Sekolah</h3>
+    <div class="system-grid">
+        <div class="system-card">
+            <div class="system-card-header">
+                <i class="fa-solid fa-school"></i>
+                <span>{{ school.name|default:"Belum diisi" }}</span>
+            </div>
+            <div class="system-card-body">
+                <p>{{ school.address|default:"Tidak ada alamat." }}</p>
+                <p>Telepon: {{ school.phone|default:"-" }}</p>
+                <p>Email: {{ school.email|default:"-" }}</p>
+            </div>
+        </div>
+    </div>
+</div>

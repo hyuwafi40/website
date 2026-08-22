@@ -1,0 +1,14 @@
+{% extends "private/base.html" %}
+{% load static %}
+{% block title %}Brand{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/field.css' %}">
+{% endblock %}
+{% block content %}
+    {% include "private/base/breadcrumb.html" %}
+    {% if is_edit %}
+        {% include "core/brand/form.html" %}
+    {% else %}
+        {% include "core/brand/detail.html" %}
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,71 @@
+<div class="resource-card">
+    <div class="resource-card-header">
+        <div class="resource-card-icon">
+            <i class="fa-solid fa-download"></i>
+        </div>
+        <div>
+            <h4 class="resource-card-title">Backup</h4>
+            <p class="resource-card-desc">Pilih model konten yang akan dicadangkan.</p>
+        </div>
+    </div>
+    <form method="post"
+          action="{% url 'core:resources_backup' %}"
+          class="resource-form"
+          data-resource-form
+          data-download="true">
+        {% csrf_token %}
+        <div class="resource-choice-grid">
+            <label class="resource-choice-card active">
+                <input type="radio" name="model_label" value="" checked>
+                <span>Semua Model Konten</span>
+            </label>
+            <label class="resource-choice-card">
+                <input type="radio" name="model_label" value="blog.Category">
+                <span>Kategori</span>
+            </label>
+            <label class="resource-choice-card">
+                <input type="radio" name="model_label" value="blog.Tag">
+                <span>Tag</span>
+            </label>
+            <label class="resource-choice-card">
+                <input type="radio" name="model_label" value="blog.Article">
+                <span>Artikel</span>
+            </label>
+            <label class="resource-choice-card">
+                <input type="radio" name="model_label" value="blog.Album">
+                <span>Album</span>
+            </label>
+            <label class="resource-choice-card">
+                <input type="radio" name="model_label" value="blog.Photos">
+                <span>Foto</span>
+            </label>
+            <label class="resource-choice-card">
+                <input type="radio" name="model_label" value="blog.Comment">
+                <span>Komentar</span>
+            </label>
+            <label class="resource-choice-card">
+                <input type="radio" name="model_label" value="blog.Page">
+                <span>Halaman</span>
+            </label>
+            <label class="resource-choice-card">
+                <input type="radio" name="model_label" value="blog.Hero">
+                <span>Hero</span>
+            </label>
+            <label class="resource-choice-card">
+                <input type="radio" name="model_label" value="blog.Advertisement">
+                <span>Iklan</span>
+            </label>
+            <label class="resource-choice-card">
+                <input type="radio" name="model_label" value="core.Brand">
+                <span>Brand</span>
+            </label>
+            <label class="resource-choice-card">
+                <input type="radio" name="model_label" value="core.School">
+                <span>School</span>
+            </label>
+        </div>
+        <button type="submit" class="btn btn-primary">
+            <i class="fa-solid fa-download"></i> Backup
+        </button>
+    </form>
+</div>

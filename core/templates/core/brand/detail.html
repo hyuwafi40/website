@@ -1,0 +1,100 @@
+<div class="field-container field-fade-in">
+    <div class="field-header">
+        <div>
+            <h2 class="field-title">{{ brand.name|default:"Brand" }}</h2>
+            <p class="field-subtitle">Informasi Brand</p>
+        </div>
+        <a href="{% url 'core:brand_update' %}" class="btn btn-primary">
+            <i class="fa-solid fa-pen-to-square"></i> Edit Brand
+        </a>
+    </div>
+    <div class="field-grid">
+        <div class="field-card">
+            <div class="field-section-header">
+                <div class="field-section-icon">
+                    <i class="fa-solid fa-copyright"></i>
+                </div>
+                <div>
+                    <h3 class="field-section-title">Brand</h3>
+                    <p class="field-section-desc">Informasi utama brand</p>
+                </div>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Nama</span>
+                <span class="field-value">{{ brand.name|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Deskripsi</span>
+                <span class="field-value">{{ brand.description|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Versi</span>
+                <span class="field-value">{{ brand.version|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Tahun</span>
+                <span class="field-value">{{ brand.tahun|default:"-" }}</span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Logo</span>
+                <div class="field-value field-logo">
+                    {% if brand.logo %}
+                        <img src="{{ brand.logo }}" alt="{{ brand.name }}">
+                        <a href="{{ brand.logo }}" target="_blank" rel="noopener noreferrer">{{ brand.logo }}</a>
+                    {% else %}
+                        -
+                    {% endif %}
+                </div>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Developer</span>
+                <span class="field-value">{{ brand.developer|default:"-" }}</span>
+            </div>
+        </div>
+        <div class="field-card">
+            <div class="field-section-header">
+                <div class="field-section-icon">
+                    <i class="fa-solid fa-share-nodes"></i>
+                </div>
+                <div>
+                    <h3 class="field-section-title">Media Sosial</h3>
+                    <p class="field-section-desc">Tautan sosial media</p>
+                </div>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Instagram</span>
+                <span class="field-value">
+                    {% if brand.instagram %}
+                        <a href="{{ brand.instagram }}"
+                           target="_blank"
+                           rel="noopener noreferrer">{{ brand.instagram }}</a>
+                    {% else %}-{% endif %}
+                </span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">YouTube</span>
+                <span class="field-value">
+                    {% if brand.youtube %}
+                        <a href="{{ brand.youtube }}" target="_blank" rel="noopener noreferrer">{{ brand.youtube }}</a>
+                    {% else %}-{% endif %}
+                </span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">TikTok</span>
+                <span class="field-value">
+                    {% if brand.tiktok %}
+                        <a href="{{ brand.tiktok }}" target="_blank" rel="noopener noreferrer">{{ brand.tiktok }}</a>
+                    {% else %}-{% endif %}
+                </span>
+            </div>
+            <div class="field-row">
+                <span class="field-label">Facebook</span>
+                <span class="field-value">
+                    {% if brand.facebook %}
+                        <a href="{{ brand.facebook }}" target="_blank" rel="noopener noreferrer">{{ brand.facebook }}</a>
+                    {% else %}-{% endif %}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

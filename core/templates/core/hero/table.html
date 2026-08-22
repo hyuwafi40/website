@@ -1,0 +1,59 @@
+{% if heroes %}
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Preview</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for hero in heroes %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ hero.name }}</td>
+                        <td>
+                            {% if hero.photo %}
+                                <img src="{{ hero.photo }}"
+                                     alt="{{ hero.name }}"
+                                     class="hero-preview-image">
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="table-actions">
+                                <button type="button"
+                                        class="btn-icon edit-hero-btn"
+                                        data-url="{% url 'core:hero_edit' hero.slug %}"
+                                        data-name="{{ hero.name }}"
+                                        data-photo="{{ hero.photo }}"
+                                        title="Edit">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+                                <button type="button"
+                                        class="btn-icon delete-btn"
+                                        data-url="{% url 'core:hero_delete' hero.slug %}"
+                                        data-title="{{ hero.name }}"
+                                        title="Hapus">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <div class="empty-state">
+        <i class="fa-solid fa-images empty-icon"></i>
+        <h3 class="empty-title">Belum Ada Hero</h3>
+        <p class="empty-desc">Mulai buat hero pertama Anda.</p>
+        <button type="button" class="btn btn-primary open-hero-modal">
+            <i class="fa-solid fa-plus"></i> Buat Hero
+        </button>
+    </div>
+{% endif %}

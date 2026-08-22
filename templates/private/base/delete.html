@@ -1,0 +1,20 @@
+<div class="modal-backdrop" id="deleteModal">
+    <div class="modal">
+        <div class="modal-header">
+            <h2>Konfirmasi Hapus</h2>
+            <button type="button" class="btn-icon" data-close-modal>
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p>Apakah Anda yakin ingin menghapus <strong id="deleteTitle"></strong>?</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-close-modal>Batal</button>
+            <form method="post" id="deleteForm">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Hapus</button>
+            </form>
+        </div>
+    </div>
+</div>

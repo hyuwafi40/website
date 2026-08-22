@@ -1,0 +1,130 @@
+<footer>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3 class="footer-col-title">{{ school.name|default:"Website Sekolah" }}</h3>
+                <p class="footer-text-muted">{{ school.motto|default:"Membentuk generasi unggul, kreatif, dan berkarakter." }}</p>
+                <address class="footer-address">
+                    {% if school.address %}<span><i class="fa-solid fa-location-dot"></i> {{ school.address }}</span>{% endif %}
+                    {% if school.phone %}<span><i class="fa-solid fa-phone"></i> {{ school.phone }}</span>{% endif %}
+                    {% if school.email %}<span><i class="fa-solid fa-envelope"></i> {{ school.email }}</span>{% endif %}
+                </address>
+            </div>
+            <div class="footer-col">
+                <h4 class="footer-col-label">Tautan</h4>
+                <ul class="footer-nav-list">
+                    <li>
+                        <a href="{% url 'blog:index' %}"
+                           class="footer-nav-link"
+                           hx-get="{% url 'blog:index' %}"
+                           hx-target="#public-main"
+                           hx-push-url="true">Beranda</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'blog:article_list' %}"
+                           class="footer-nav-link"
+                           hx-get="{% url 'blog:article_list' %}"
+                           hx-target="#public-main"
+                           hx-push-url="true">Artikel</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'blog:album_list' %}"
+                           class="footer-nav-link"
+                           hx-get="{% url 'blog:album_list' %}"
+                           hx-target="#public-main"
+                           hx-push-url="true">Galeri</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 class="footer-col-label">Halaman & Kategori</h4>
+                <div class="footer-sub-grid">
+                    <div>
+                        <h5 class="footer-sub-title">Halaman</h5>
+                        <ul class="footer-nav-list">
+                            {% for page in pages|slice:":5" %}
+                                <li>
+                                    <a href="{% url 'blog:page_detail' page.slug %}"
+                                       class="footer-nav-link"
+                                       hx-get="{% url 'blog:page_detail' page.slug %}"
+                                       hx-target="#public-main"
+                                       hx-push-url="true">{{ page.title }}</a>
+                                </li>
+                            {% empty %}
+                                <li>
+                                    <a href="{% url 'blog:page_list' %}"
+                                       class="footer-nav-link"
+                                       hx-get="{% url 'blog:page_list' %}"
+                                       hx-target="#public-main"
+                                       hx-push-url="true">Semua Halaman</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="footer-sub-title">Kategori</h5>
+                        <ul class="footer-nav-list">
+                            {% for category in categories|slice:":5" %}
+                                <li>
+                                    <a href="{% url 'blog:category_detail' category.slug %}"
+                                       class="footer-nav-link"
+                                       hx-get="{% url 'blog:category_detail' category.slug %}"
+                                       hx-target="#public-main"
+                                       hx-push-url="true">{{ category.name }}</a>
+                                </li>
+                            {% empty %}
+                                <li>
+                                    <a href="{% url 'blog:category_list' %}"
+                                       class="footer-nav-link"
+                                       hx-get="{% url 'blog:category_list' %}"
+                                       hx-target="#public-main"
+                                       hx-push-url="true">Semua Kategori</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4 class="footer-col-label">Ikuti Kami</h4>
+                <ul class="footer-social-list">
+                    {% if brand.instagram %}
+                        <li><a href="{{ brand.instagram }}"
+   target="_blank"
+   rel="noopener noreferrer"
+   class="footer-social-link"><i class="fa-brands fa-instagram"></i> Instagram</a></li>
+                    {% endif %}
+                    {% if brand.youtube %}
+                        <li><a href="{{ brand.youtube }}"
+   target="_blank"
+   rel="noopener noreferrer"
+   class="footer-social-link"><i class="fa-brands fa-youtube"></i> YouTube</a></li>
+                    {% endif %}
+                    {% if brand.tiktok %}
+                        <li><a href="{{ brand.tiktok }}"
+   target="_blank"
+   rel="noopener noreferrer"
+   class="footer-social-link"><i class="fa-brands fa-tiktok"></i> TikTok</a></li>
+                    {% endif %}
+                    {% if brand.facebook %}
+                        <li><a href="{{ brand.facebook }}"
+   target="_blank"
+   rel="noopener noreferrer"
+   class="footer-social-link"><i class="fa-brands fa-facebook"></i> Facebook</a></li>
+                    {% endif %}
+                </ul>
+                <h4 class="footer-col-label footer-account-label">Akun</h4>
+                <ul class="footer-nav-list">
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'core:index' %}" class="footer-nav-link">Dashboard</a></li>
+                    {% else %}
+                        <li><a href="{% url 'login' %}" class="footer-nav-link">Masuk</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; {% now "Y" %} {{ school.name|default:"Website Sekolah" }}. Dikembangkan oleh {{ brand.developer|default:"-" }}.</span>
+        </div>
+    </div>
+</footer>

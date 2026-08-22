@@ -1,0 +1,21 @@
+{% extends "private/base.html" %}
+{% load static %}
+{% block title %}Kategori{% endblock %}
+{% block content %}
+    {% include "private/base/breadcrumb.html" %}
+    <div class="page-header">
+        <div>
+            <h2 class="page-title">Daftar Kategori</h2>
+            <p class="page-subtitle">Kelola kategori artikel</p>
+        </div>
+        <button type="button" class="btn btn-primary open-category-modal">
+            <i class="fa-solid fa-plus"></i> Buat Kategori
+        </button>
+    </div>
+    {% include "core/category/table.html" %}
+    {% include "private/base/pagination.html" %}
+    {% include "core/category/form.html" %}
+{% endblock %}
+{% block extra_js %}
+    <script src="{% static 'core/category.js' %}"></script>
+{% endblock %}

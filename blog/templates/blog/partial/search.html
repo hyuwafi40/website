@@ -1,0 +1,77 @@
+<div class="container search-header reveal">
+    <h1 class="section-title">Hasil Pencarian</h1>
+    {% if query %}
+        <p class="page-subtitle">Ditemukan {{ results_count }} hasil untuk "{{ query }}"</p>
+    {% else %}
+        <p class="page-subtitle">Masukkan kata kunci untuk mulai mencari.</p>
+    {% endif %}
+</div>
+<div class="container search-form-wrap">
+    <form class="search-bar search-bar-lg"
+          method="get"
+          action="{% url 'blog:search' %}"
+          hx-get="{% url 'blog:search' %}"
+          hx-target="#public-main"
+          hx-push-url="true">
+        <i class="fa-solid fa-search icon-primary"></i>
+        <input type="search"
+               name="q"
+               value="{{ query }}"
+               placeholder="Cari artikel, kategori, penulis..."
+               aria-label="Cari konten">
+        <button type="submit" class="btn btn-primary">Cari</button>
+    </form>
+</div>
+{% if query %}
+    <div class="container search-result-grid">
+        <div class="grid-3">
+            {% for article in results %}
+                <article class="article-card reveal stagger-{{ forloop.counter0|divisibleby:3|yesno:"1,2,3" }}">
+                    <div class="card-img-wrap">
+                        <span class="badge badge-sky card-badge">{{ article.category.name|default:"Umum" }}</span>
+                        {% if article.thumbnail %}
+                            <img src="{{ article.thumbnail }}"
+                                 alt="{{ article.title }}"
+                                 loading="lazy">
+                        {% endif %}
+                    </div>
+                    <div class="card-content">
+                        <div class="card-meta">
+                            <span><i class="fa-regular fa-calendar icon-primary"></i> {{ article.created_at|date:"d F Y" }}</span>
+                            <span><i class="fa-solid fa-user"></i> {{ article.created_by }}</span>
+                        </div>
+                        <h3 class="card-title">
+                            <a href="{% url 'blog:article_detail' article.slug %}"
+                               hx-get="{% url 'blog:article_detail' article.slug %}"
+                               hx-target="#public-main"
+                               hx-push-url="true">{{ article.title }}</a>
+                        </h3>
+                        <p class="card-excerpt">{{ article.content|striptags|truncatechars:120 }}</p>
+                        <a href="{% url 'blog:article_detail' article.slug %}"
+                           class="read-more"
+                           hx-get="{% url 'blog:article_detail' article.slug %}"
+                           hx-target="#public-main"
+                           hx-push-url="true">Baca Lanjut <i class="fa-solid fa-arrow-right-long"></i></a>
+                    </div>
+                </article>
+            {% empty %}
+                <div class="state-container">
+                    <i class="fa-solid fa-magnifying-glass state-icon"></i>
+                    <h2 class="section-title">Tidak Ada Hasil</h2>
+                    <p>Coba kata kunci lain.</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% else %}
+    <div class="container search-empty-state">
+        <div class="state-container">
+            <i class="fa-solid fa-search state-icon"></i>
+            <h2 class="section-title">Mulai Mencari</h2>
+            <p>Gunakan form di atas untuk mencari konten.</p>
+        </div>
+    </div>
+{% endif %}
+{% if query %}
+    {% include "public/base/pagination.html" %}
+{% endif %}
