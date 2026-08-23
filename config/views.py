@@ -33,4 +33,4 @@ class IndexView(View):
 def logout_view(request):
     logout(request)
     messages.info(request, "Anda telah keluar.")
-    return redirect("login")
+    return redirect("blog:index")
