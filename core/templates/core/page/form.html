@@ -1,11 +1,11 @@
-{% extends "private/base.html" %}
+{% extends "core/base.html" %}
 {% load static %}
 {% block title %}{{ page_heading }}{% endblock %}
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'core/page.css' %}">
 {% endblock %}
 {% block content %}
-    {% include "private/base/breadcrumb.html" %}
+    {% include "core/base/breadcrumb.html" %}
     {{ form.media }}
     <div class="page-form">
         <div class="page-form-header">

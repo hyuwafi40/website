@@ -1,11 +1,11 @@
-{% extends "private/base.html" %}
+{% extends "core/base.html" %}
 {% load static %}
 {% block title %}Pengguna{% endblock %}
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'core/account.css' %}">
 {% endblock %}
 {% block content %}
-    {% include "private/base/breadcrumb.html" %}
+    {% include "core/base/breadcrumb.html" %}
     <div class="page-header">
         <div>
             <h2 class="page-title">Daftar Pengguna</h2>
@@ -16,7 +16,7 @@
         </button>
     </div>
     {% include "core/account/table.html" %}
-    {% include "private/base/pagination.html" %}
+    {% include "core/base/pagination.html" %}
     {% include "core/account/form.html" %}
 {% endblock %}
 {% block extra_js %}

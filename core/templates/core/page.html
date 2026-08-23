@@ -1,11 +1,11 @@
-{% extends "private/base.html" %}
+{% extends "core/base.html" %}
 {% load static %}
 {% block title %}Halaman{% endblock %}
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'core/page.css' %}">
 {% endblock %}
 {% block content %}
-    {% include "private/base/breadcrumb.html" %}
+    {% include "core/base/breadcrumb.html" %}
     <div class="page-header">
         <div>
             <h2 class="page-title">Daftar Halaman</h2>
@@ -16,5 +16,5 @@
         </a>
     </div>
     {% include "core/page/table.html" %}
-    {% include "private/base/pagination.html" %}
+    {% include "core/base/pagination.html" %}
 {% endblock %}

@@ -1,11 +1,11 @@
-{% extends "private/base.html" %}
+{% extends "core/base.html" %}
 {% load static %}
 {% block title %}Hero{% endblock %}
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'core/hero.css' %}">
 {% endblock %}
 {% block content %}
-    {% include "private/base/breadcrumb.html" %}
+    {% include "core/base/breadcrumb.html" %}
     <div class="page-header">
         <div>
             <h2 class="page-title">Daftar Hero</h2>
@@ -16,7 +16,7 @@
         </button>
     </div>
     {% include "core/hero/table.html" %}
-    {% include "private/base/pagination.html" %}
+    {% include "core/base/pagination.html" %}
     {% include "core/hero/form.html" %}
 {% endblock %}
 {% block extra_js %}

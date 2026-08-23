@@ -1,8 +1,8 @@
-{% extends "private/base.html" %}
+{% extends "core/base.html" %}
 {% load static %}
 {% block title %}Tag{% endblock %}
 {% block content %}
-    {% include "private/base/breadcrumb.html" %}
+    {% include "core/base/breadcrumb.html" %}
     <div class="page-header">
         <div>
             <h2 class="page-title">Daftar Tag</h2>
@@ -13,7 +13,7 @@
         </button>
     </div>
     {% include "core/tag/table.html" %}
-    {% include "private/base/pagination.html" %}
+    {% include "core/base/pagination.html" %}
     {% include "core/tag/form.html" %}
 {% endblock %}
 {% block extra_js %}

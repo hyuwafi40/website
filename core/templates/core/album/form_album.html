@@ -1,11 +1,11 @@
-{% extends "private/base.html" %}
+{% extends "core/base.html" %}
 {% load static %}
 {% block title %}{{ page_heading }}{% endblock %}
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'core/album.css' %}">
 {% endblock %}
 {% block content %}
-    {% include "private/base/breadcrumb.html" %}
+    {% include "core/base/breadcrumb.html" %}
     <div class="album-form">
         <div class="album-form-header">
             <h2 class="album-title">{{ page_heading }}</h2>

@@ -1,11 +1,11 @@
-{% extends "private/base.html" %}
+{% extends "core/base.html" %}
 {% load static %}
 {% block title %}Semua Foto{% endblock %}
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'core/album.css' %}">
 {% endblock %}
 {% block content %}
-    {% include "private/base/breadcrumb.html" %}
+    {% include "core/base/breadcrumb.html" %}
     <div class="page-header">
         <div>
             <h2 class="page-title">Semua Foto</h2>
@@ -28,7 +28,7 @@
                 </figure>
             {% endfor %}
         </div>
-        {% include "private/base/pagination.html" %}
+        {% include "core/base/pagination.html" %}
     {% else %}
         <div class="empty-state">
             <i class="fa-solid fa-image empty-icon"></i>

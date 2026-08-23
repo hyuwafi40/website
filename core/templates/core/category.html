@@ -1,8 +1,8 @@
-{% extends "private/base.html" %}
+{% extends "core/base.html" %}
 {% load static %}
 {% block title %}Kategori{% endblock %}
 {% block content %}
-    {% include "private/base/breadcrumb.html" %}
+    {% include "core/base/breadcrumb.html" %}
     <div class="page-header">
         <div>
             <h2 class="page-title">Daftar Kategori</h2>
@@ -13,7 +13,7 @@
         </button>
     </div>
     {% include "core/category/table.html" %}
-    {% include "private/base/pagination.html" %}
+    {% include "core/base/pagination.html" %}
     {% include "core/category/form.html" %}
 {% endblock %}
 {% block extra_js %}
