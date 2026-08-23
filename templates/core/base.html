@@ -15,19 +15,19 @@
     </head>
     <body>
         <div id="app-layout">
-            {% include "private/base/sidebar.html" %}
-            {% include "private/base/navbar.html" %}
+            {% include "core/base/sidebar.html" %}
+            {% include "core/base/navbar.html" %}
             <div id="main-wrapper">
                 <main id="main-content">
                     <div class="content-inner">
                         {% block content %}{% endblock %}
                     </div>
-                    {% include "private/base/footer.html" %}
+                    {% include "core/base/footer.html" %}
                 </main>
             </div>
         </div>
-        {% include "private/base/toast.html" %}
-        {% include "private/base/delete.html" %}
+        {% include "core/base/toast.html" %}
+        {% include "core/base/delete.html" %}
         {% block modal %}{% endblock %}
         <script src="{% static 'js/core.js' %}"></script>
         {% block extra_js %}{% endblock %}
