@@ -55,7 +55,7 @@
             {% block extra_css %}{% endblock %}
       </head>
       <body class="{% block body_class %}public-body{% endblock %}">
-            {% include "public/base/navbar.html" %}
+            {% include "blog/base/navbar.html" %}
             {% if messages %}
                   <div class="public-toast-container">
                         {% for message in messages %}
@@ -66,7 +66,7 @@
             <main id="public-main" class="public-main">
                   {% block content %}{% endblock %}
             </main>
-            {% include "public/base/footer.html" %}
+            {% include "blog/base/footer.html" %}
             <script defer src="https://unpkg.com/htmx.org@2.0.1"></script>
             <script defer src="{% static 'js/blog.js' %}"></script>
             {% block extra_js %}{% endblock %}
