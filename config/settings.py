@@ -142,7 +142,7 @@ AUTHENTICATION_BACKENDS = [
 
 LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "core:index"
-LOGOUT_REDIRECT_URL = "login"
+LOGOUT_REDIRECT_URL = "blog:index"
 
 STORAGES = {
     "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
